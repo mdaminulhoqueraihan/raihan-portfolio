@@ -1,13 +1,13 @@
 # Md. Aminul Hoque Raihan — Portfolio
 
-Production-focused personal portfolio for Shopify planning, design, development, CRO, copywriting and commerce management.
+Production-focused personal portfolio for Shopify and custom website design and development, CRO, digital marketing, copywriting and commerce management.
 
 ## Current scope
 
 - Responsive homepage
 - Interactive `/work/` archive with 17 supplied storefront captures
 - Interactive `/results/` evidence archive with 14 supplied Shopify and Meta dashboard captures
-- Dedicated `/services/` page for end-to-end Shopify and commerce engagements
+- Dedicated `/services/` page for Shopify, custom websites, digital marketing and connected commerce engagements
 - Recruiter-focused `/experience/` page with the verified career record and education
 - Dedicated `/contact/` page with direct contact details and a frontend-ready project brief workflow
 - Mobile announcement slider with manual controls and autoplay
@@ -21,7 +21,7 @@ Production-focused personal portfolio for Shopify planning, design, development,
 - `/work/` — interactive project index with one active auto-scrolling preview
 - `/work/[slug]/` — case studies with auto-scrolling website screenshots
 - `/results/` — verified advertising, store performance and organic search-attribution evidence
-- `/services/` — planning, UX, development, CRO, copywriting and ongoing commerce-management scope
+- `/services/` — Shopify, custom website development, digital marketing, UX, CRO, copywriting and ongoing management
 - `/experience/` — career chronology, role responsibilities, technical background and recruiter summary
 - `/contact/` — hiring and project inquiry page with validated email-draft handoff
 

@@ -4,12 +4,12 @@ const qa=(selector,parent=document)=>[...parent.querySelectorAll(selector)];
 const capabilityData={
   build:{
     index:'01 / BUILD',
-    title:'A storefront built around how the business sells.',
-    copy:'I translate products, offers and operational needs into a Shopify structure that is responsive, manageable and ready for customers.',
+    title:'A website built around what the business needs to achieve.',
+    copy:'I translate the offer, audience and operational needs into a responsive Shopify store or custom website that is clear, maintainable and ready to perform.',
     rows:[
-      ['Theme & storefront development','Custom sections, responsive layouts and Shopify theme implementation.'],
-      ['Commerce architecture','Products, collections, variants, bundles, apps and purchase flows.'],
-      ['Ongoing management','Store operations, maintenance and performance improvement.']
+      ['Shopify storefront development','Custom sections, responsive layouts and Shopify theme implementation.'],
+      ['Custom website development','Brand-led business websites and landing experiences built around the required functionality.'],
+      ['Experience architecture','Pages, content hierarchy, navigation and conversion paths.']
     ]
   },
   optimize:{
@@ -23,13 +23,13 @@ const capabilityData={
     ]
   },
   grow:{
-    index:'03 / MANAGE',
-    title:'The store keeps improving after the initial launch.',
-    copy:'I coordinate storefront updates, campaigns, reporting and growth priorities as one ongoing commerce operation.',
+    index:'03 / GROW',
+    title:'Digital marketing connected to the experience after the click.',
+    copy:'I plan and manage campaigns, creative direction, landing journeys and performance priorities around one measurable business goal.',
     rows:[
-      ['Ongoing store management','Maintenance, merchandising, campaign pages and operational improvements.'],
-      ['Campaign coordination','Paid acquisition, creative and landing experience kept aligned.'],
-      ['SEO & analytics oversight','Managed within active commerce engagements to guide priorities and teams.']
+      ['Digital marketing campaigns','Paid and organic campaign planning, execution and ongoing improvement.'],
+      ['Creative & landing alignment','Advertising message, creative and post-click experience kept connected.'],
+      ['Performance management','Campaign reporting plus SEO and analytics oversight used to guide priorities.']
     ]
   }
 };
