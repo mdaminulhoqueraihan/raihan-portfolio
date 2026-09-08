@@ -8,6 +8,7 @@ Production-focused personal portfolio for Shopify planning, design, development,
 - Interactive `/work/` archive with 17 supplied storefront captures
 - Interactive `/results/` evidence archive with 14 supplied Shopify and Meta dashboard captures
 - Dedicated `/services/` page for end-to-end Shopify and commerce engagements
+- Recruiter-focused `/experience/` page with the verified career record and education
 - Mobile announcement slider with manual controls and autoplay
 - Accessible interactive capabilities and experience sections
 - Downloadable CV and direct contact links
@@ -20,6 +21,7 @@ Production-focused personal portfolio for Shopify planning, design, development,
 - `/work/[slug]/` — case studies with auto-scrolling website screenshots
 - `/results/` — verified advertising, store performance and organic search-attribution evidence
 - `/services/` — planning, UX, development, CRO, copywriting and ongoing commerce-management scope
+- `/experience/` — career chronology, role responsibilities, technical background and recruiter summary
 
 ## Admin-ready direction
 
