@@ -1,7 +1,7 @@
 const q=(selector,parent=document)=>parent.querySelector(selector);
 const qa=(selector,parent=document)=>[...parent.querySelectorAll(selector)];
 
-const projects=[
+const DEFAULT_PROJECTS=[
   {slug:'august-sabbe',name:'August Sabbe',category:'Fashion / DTC',image:'../assets/projects/august-sabbe.jpg',width:459,height:2048,summary:'A product-led apparel storefront structured around clear discovery, purchase confidence and everyday comfort.'},
   {slug:'jawliner',name:'Jawliner',category:'Wellness / Fitness',image:'../assets/projects/jawliner.jpg',width:266,height:2048,summary:'An education-rich wellness storefront combining product merchandising, expert context, social proof and conversion content.'},
   {slug:'tsc-wardrobe',name:'TSC Wardrobe',category:'Luxury fashion',image:'../assets/projects/tsc-wardrobe.jpg',width:644,height:2048,summary:'A restrained fashion experience built around curated collections, complete-the-look merchandising and brand storytelling.'},
@@ -20,6 +20,7 @@ const projects=[
   {slug:'kykr-brands',name:'KYKR Brands',category:'Automotive / Accessories',image:'../assets/projects/kykr-brands.jpg',width:649,height:2048,summary:'A bold automotive accessory storefront built around product protection, vehicle-brand discovery, benefit proof and warranty messaging.'},
   {slug:'always-on-it',name:'Always On It',category:'Wellness / Focus',image:'../assets/projects/always-on-it.jpg',width:387,height:2048,summary:'A dark, youth-focused wellness storefront connecting product positioning, usage moments, comparison content and brand energy.'}
 ];
+let projects=[...DEFAULT_PROJECTS];
 
 const menuButton=q('#menuButton');
 menuButton.addEventListener('click',()=>{
@@ -52,7 +53,7 @@ const previewImage=q('#previewImage');
 const captureFrame=q('#captureFrame');
 const previewProgress=q('#previewProgress');
 const togglePreview=q('#togglePreview');
-const projectButtons=qa('[data-project]');
+let projectButtons=qa('[data-project]');
 const filterButtons=qa('[data-filter]');
 const projectRail=q('#projectRail');
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
@@ -102,6 +103,8 @@ function setProject(index){
   q('#previewCategory').textContent=project.category;
   q('#previewTitle').textContent=project.name;
   q('#previewSummary').textContent=project.summary;
+  q('#previewOwnership').textContent=project.ownership||'End-to-end';
+  q('#previewContribution').textContent=project.contribution||'Planning · Optimization · Design · Development · Copywriting';
   projectButtons.forEach(button=>{
     const active=button.dataset.project===project.slug;
     button.classList.toggle('active',active);
@@ -121,7 +124,10 @@ function setProject(index){
   if(previewImage.complete)onReady();
 }
 
-projectButtons.forEach((button,index)=>button.addEventListener('click',()=>setProject(index)));
+function bindProjectButtons(){
+  projectButtons.forEach((button,index)=>button.addEventListener('click',()=>setProject(index)));
+}
+bindProjectButtons();
 function visibleIndexes(){
   return projectButtons.map((button,index)=>button.hidden?null:index).filter(index=>index!==null);
 }
@@ -177,4 +183,32 @@ function updateScrollProgress(){
 }
 addEventListener('scroll',updateScrollProgress,{passive:true});
 updateScrollProgress();
-previewImage.complete?startPreview():previewImage.addEventListener('load',startPreview,{once:true});
+
+const escapeHtml=value=>String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+async function loadManagedProjects(){
+  if(!window.portfolioDb){setProject(0);return}
+  const {data,error}=await window.portfolioDb.from('projects').select('*').eq('published',true).order('sort_order');
+  if(error||!data?.length){setProject(0);return}
+  projects=data.map(project=>({
+    slug:project.slug,
+    name:project.title,
+    category:project.category,
+    group:project.group_key,
+    image:project.image_url,
+    width:project.image_width,
+    height:project.image_height,
+    summary:project.summary,
+    ownership:project.ownership,
+    contribution:project.contribution,
+    website:project.website_url
+  }));
+  projectRail.innerHTML=projects.map((project,index)=>`<button class="project-select${index===0?' active':''}" type="button" data-project="${escapeHtml(project.slug)}" data-group="${escapeHtml(project.group)}" aria-pressed="${index===0}"><strong>${escapeHtml(project.name)}</strong><small>${escapeHtml(project.category)}</small></button>`).join('');
+  projectButtons=qa('[data-project]');
+  bindProjectButtons();
+  activeFilter='all';
+  setProject(0);
+}
+
+const startManagedProjects=()=>loadManagedProjects().catch(error=>{console.warn('Managed projects unavailable; static portfolio remains visible.',error);setProject(0)});
+if(window.portfolioDb)startManagedProjects();
+else{setProject(0);document.addEventListener('portfolio:db-ready',startManagedProjects,{once:true})}

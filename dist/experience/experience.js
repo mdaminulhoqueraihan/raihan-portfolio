@@ -43,3 +43,19 @@ function updateScrollProgress(){
 }
 addEventListener('scroll',updateScrollProgress,{passive:true});
 updateScrollProgress();
+
+const escapeHtml=value=>String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+
+async function loadManagedExperience(){
+  if(!window.portfolioDb)return;
+  const {data,error}=await window.portfolioDb.from('experience_items').select('*').eq('published',true).order('sort_order');
+  if(error||!data?.length)return;
+  const ledger=q('#roleLedger');
+  ledger.innerHTML=data.map((role,index)=>`<article class="role-entry reveal visible" id="role-${escapeHtml(role.slug)}"><div class="role-date"><strong>${escapeHtml(role.date_start)}</strong><span>${escapeHtml(role.date_end)}</span></div><div class="role-main"><div class="role-label"><span>${escapeHtml(role.organization)}</span><b>${String(index+1).padStart(2,'0')}</b></div><h3>${escapeHtml(role.title)}</h3><p>${escapeHtml(role.summary)}</p><ul>${(role.items||[]).map(item=>`<li>${escapeHtml(item)}</li>`).join('')}</ul><div class="role-links"><a href="../contact/">Discuss an opportunity ↗</a></div></div></article>`).join('');
+  const index=q('.career-index');
+  if(index)index.innerHTML=`<span class="label">Timeline</span>${data.map(role=>`<a href="#role-${escapeHtml(role.slug)}"><b>${escapeHtml(role.date_start)}—${escapeHtml(role.date_end)}</b>${escapeHtml(role.title)}</a>`).join('')}`;
+}
+
+const startManagedExperience=()=>loadManagedExperience().catch(error=>console.warn('Managed experience unavailable; static career record remains visible.',error));
+if(window.portfolioDb)startManagedExperience();
+else document.addEventListener('portfolio:db-ready',startManagedExperience,{once:true});

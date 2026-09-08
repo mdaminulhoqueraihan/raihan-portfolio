@@ -1,7 +1,7 @@
 const q=(selector,parent=document)=>parent.querySelector(selector);
 const qa=(selector,parent=document)=>[...parent.querySelectorAll(selector)];
 
-const evidence=[
+const DEFAULT_EVIDENCE=[
   {id:'store-sales-a',group:'store',source:'Shopify Analytics',period:'Sep 7, 2025—Sep 7, 2026',metric:'$4,055,273.79',label:'Total sales across the selected 12-month period',context:'The same dashboard records $4.42M gross sales and $3.72M net sales.',details:[['Gross sales','$4,420,419.09'],['Net sales','$3,725,862.03'],['Source','Shopify']],image:'../assets/results/store-sales-4m.png',width:1906,height:589,alt:'Shopify analytics screenshot showing 4,055,273 dollars and 79 cents in total sales'},
   {id:'store-conversion-a',group:'store',source:'Shopify Analytics',period:'Sep 7, 2025—Sep 7, 2026',metric:'2.74%',label:'Online store conversion rate',context:'The funnel records 1,174,433 sessions, 153,648 add-to-carts, 98,175 reached checkout and 32,259 completed sessions.',details:[['Sessions','1,174,433'],['Added to cart','153,648'],['Completed','32,259']],image:'../assets/results/store-conversion-4m.png',width:1905,height:840,alt:'Shopify analytics screenshot showing a 2.74 percent conversion rate and 1,174,433 sessions'},
   {id:'organic-chart-a',group:'seo',source:'Shopify Analytics · Search attribution',period:'Sep 7, 2025—Sep 7, 2026',metric:'$680.3K',label:'Total sales attributed to Google search',context:'Google is shown as a major order referrer inside a $4.05M total-sales report.',details:[['Channel','Search · Google'],['Attributed sales','$680.3K'],['Source','Shopify']],image:'../assets/results/organic-revenue-chart-680k.png',width:1919,height:829,alt:'Shopify report chart showing 680,300 dollars in sales attributed to Google search'},
@@ -17,6 +17,7 @@ const evidence=[
   {id:'meta-recall',group:'ads',source:'Meta Ads Manager',period:'Maximum account range shown: Aug 8, 2023—Sep 8, 2026',metric:'4,470',label:'Estimated ad recall lift at $0.003 per result',context:'The same supplied view also records 1,130 and 450 estimated ad-recall-lift results at $0.003 each.',details:[['Cost per result','$0.003'],['Other results','1,130 and 450'],['Result type','Ad recall lift']],image:'../assets/results/meta-recall-lift.png',width:1863,height:646,alt:'Meta Ads Manager screenshot showing 4,470 estimated ad recall lift results at 0.003 dollars each'},
   {id:'meta-thruplays',group:'ads',source:'Meta Ads Manager',period:'Maximum account range shown: Aug 8, 2023—Sep 8, 2026',metric:'5,696',label:'Video ThruPlays at $0.001 per result',context:'The supplied view also records 5,427 and 3,596 ThruPlays at the same displayed cost per result.',details:[['Cost per ThruPlay','$0.001'],['Other results','5,427 and 3,596'],['Result type','ThruPlay']],image:'../assets/results/meta-thruplays.png',width:1849,height:770,alt:'Meta Ads Manager screenshot showing 5,696 video ThruPlays at 0.001 dollars each'}
 ];
+let evidence=[...DEFAULT_EVIDENCE];
 
 const menuButton=q('#menuButton');
 menuButton.addEventListener('click',()=>{
@@ -44,7 +45,7 @@ if(announcementSlider){
   start();
 }
 
-const selectors=qa('[data-evidence]');
+let selectors=qa('[data-evidence]');
 const filters=qa('[data-filter]');
 const rail=q('#evidenceRail');
 const modal=q('#evidenceModal');
@@ -100,7 +101,10 @@ function applyFilter(value){
   rail.scrollTo({left:0,behavior:reducedMotion.matches?'auto':'smooth'});
 }
 
-selectors.forEach((button,index)=>button.addEventListener('click',()=>renderEvidence(index)));
+function bindEvidenceSelectors(){
+  selectors.forEach((button,index)=>button.addEventListener('click',()=>renderEvidence(index)));
+}
+bindEvidenceSelectors();
 filters.forEach(button=>button.addEventListener('click',()=>applyFilter(button.dataset.filter)));
 q('#previousEvidence').addEventListener('click',()=>stepEvidence(-1));
 q('#nextEvidence').addEventListener('click',()=>stepEvidence(1));
@@ -165,4 +169,33 @@ function updateScrollProgress(){
 }
 addEventListener('scroll',updateScrollProgress,{passive:true});
 updateScrollProgress();
-renderEvidence(0,false);
+
+const escapeHtml=value=>String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+async function loadManagedEvidence(){
+  if(!window.portfolioDb){renderEvidence(0,false);return}
+  const {data,error}=await window.portfolioDb.from('results').select('*').eq('published',true).order('sort_order');
+  if(error||!data?.length){renderEvidence(0,false);return}
+  evidence=data.map(item=>({
+    id:item.slug,
+    group:item.group_key,
+    source:item.source,
+    period:item.period,
+    metric:item.metric,
+    label:item.label,
+    context:item.context,
+    details:Array.isArray(item.details)?item.details:[],
+    image:item.image_url,
+    width:item.image_width,
+    height:item.image_height,
+    alt:item.image_alt
+  }));
+  rail.innerHTML=evidence.map((item,index)=>`<button class="evidence-select${index===0?' active':''}" type="button" data-evidence="${escapeHtml(item.id)}" data-group="${escapeHtml(item.group)}" aria-pressed="${index===0}"><span>${String(index+1).padStart(2,'0')}</span><strong>${escapeHtml(item.metric)}</strong><small>${escapeHtml(item.source)}</small></button>`).join('');
+  selectors=qa('[data-evidence]');
+  bindEvidenceSelectors();
+  activeFilter='all';
+  renderEvidence(0,false);
+}
+
+const startManagedEvidence=()=>loadManagedEvidence().catch(error=>{console.warn('Managed evidence unavailable; static evidence remains visible.',error);renderEvidence(0,false)});
+if(window.portfolioDb)startManagedEvidence();
+else{renderEvidence(0,false);document.addEventListener('portfolio:db-ready',startManagedEvidence,{once:true})}

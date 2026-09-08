@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#080a0f">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Portfolio Admin | Aminul Raihan</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="auth-shell" id="authShell">
+    <section class="auth-card" aria-labelledby="authTitle">
+      <a class="admin-brand" href="../"><span>AR</span><strong>Aminul Raihan</strong></a>
+      <div class="auth-kicker">Private content workspace</div>
+      <h1 id="authTitle">Portfolio<br>control room.</h1>
+      <p>Sign in with the authorized owner account to manage website content, portfolio media, performance evidence and inquiries.</p>
+      <form id="authForm">
+        <label>Email<input id="authEmail" name="email" type="email" value="mdaminulhoqueraihan@gmail.com" autocomplete="username" readonly required></label>
+        <label>Password<input id="authPassword" name="password" type="password" minlength="8" autocomplete="current-password" placeholder="Your secure password" required></label>
+        <button type="submit" id="signInButton">Sign in ↗</button>
+        <button class="secondary" type="button" id="setupButton">First-time account setup</button>
+        <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
+      </form>
+      <small>Only the authorized portfolio owner can access data. Public visitors cannot read inquiries or change content.</small>
+    </section>
+    <aside class="auth-proof"><span>SECURED BY</span><strong>Supabase Auth<br>Row Level Security</strong><div><b>01</b>Owner-only editing</div><div><b>02</b>Private inquiry inbox</div><div><b>03</b>Protected media uploads</div></aside>
+  </main>
+
+  <div class="admin-app" id="adminApp" hidden>
+    <aside class="sidebar">
+      <a class="admin-brand" href="../"><span>AR</span><strong>Aminul Raihan</strong></a>
+      <div class="sidebar-label">Workspace</div>
+      <nav id="adminNav" aria-label="Admin sections">
+        <button class="active" type="button" data-section="overview"><span>Overview</span><b>01</b></button>
+        <button type="button" data-section="content"><span>Page content</span><b>02</b></button>
+        <button type="button" data-section="services"><span>Services</span><b>03</b></button>
+        <button type="button" data-section="experience"><span>Experience</span><b>04</b></button>
+        <button type="button" data-section="projects"><span>Portfolio work</span><b>05</b></button>
+        <button type="button" data-section="results"><span>Results</span><b>06</b></button>
+        <button type="button" data-section="inquiries"><span>Inquiries</span><b id="inquiryBadge">07</b></button>
+        <button type="button" data-section="media"><span>Media library</span><b>08</b></button>
+        <button type="button" data-section="settings"><span>Site settings</span><b>09</b></button>
+      </nav>
+      <div class="sidebar-foot"><a href="../" target="_blank">Open website ↗</a><button type="button" id="signOutButton">Sign out</button></div>
+    </aside>
+
+    <main class="workspace">
+      <header class="workspace-head"><div><span id="sectionKicker">Portfolio CMS</span><h1 id="sectionTitle">Overview</h1></div><div class="owner-chip"><i></i><span>Signed in as<br><strong id="ownerEmail">Owner</strong></span></div></header>
+      <section class="workspace-body" id="workspaceBody" aria-live="polite"><div class="loading">Loading workspace…</div></section>
+    </main>
+  </div>
+
+  <dialog class="editor-modal" id="editorModal">
+    <form method="dialog" class="editor-panel" id="editorForm">
+      <header><div><span id="editorKicker">Edit record</span><h2 id="editorTitle">Content</h2></div><button type="button" class="icon-button" id="closeEditor" aria-label="Close editor">×</button></header>
+      <div class="editor-fields" id="editorFields"></div>
+      <footer><button class="danger" type="button" id="deleteRecord" hidden>Delete</button><span></span><button class="secondary" type="button" id="cancelEditor">Cancel</button><button class="primary" type="submit" id="saveRecord">Save changes</button></footer>
+      <p class="editor-status" id="editorStatus" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4" crossorigin="anonymous"></script>
+  <script src="../supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

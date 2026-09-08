@@ -61,11 +61,14 @@ qa('[data-capability]').forEach((button,index,buttons)=>button.addEventListener(
   buttons[nextIndex].click();
 }));
 
-qa('.exp-trigger').forEach(button=>button.addEventListener('click',()=>{
-  const item=button.closest('.exp-item');
-  item.classList.toggle('open');
-  button.setAttribute('aria-expanded',item.classList.contains('open'));
-}));
+function bindExperienceTriggers(){
+  qa('.exp-trigger').forEach(button=>button.addEventListener('click',()=>{
+    const item=button.closest('.exp-item');
+    item.classList.toggle('open');
+    button.setAttribute('aria-expanded',item.classList.contains('open'));
+  }));
+}
+bindExperienceTriggers();
 
 const menuButton=q('#menuButton');
 menuButton.addEventListener('click',()=>{
@@ -120,3 +123,29 @@ function updateScrollProgress(){
 }
 addEventListener('scroll',updateScrollProgress,{passive:true});
 updateScrollProgress();
+
+const escapeHtml=value=>String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+async function loadManagedHomepage(){
+  if(!window.portfolioDb)return;
+  const [{data:blocks},{data:roles}]=await Promise.all([
+    window.portfolioDb.from('content_blocks').select('content_key,value').eq('page_slug','home').eq('published',true).like('content_key','capability.%'),
+    window.portfolioDb.from('experience_items').select('*').eq('published',true).order('sort_order')
+  ]);
+  const values=Object.fromEntries((blocks||[]).map(block=>[block.content_key,block.value]));
+  ['build','optimize','grow'].forEach(key=>{
+    capabilityData[key].title=values[`capability.${key}.title`]||capabilityData[key].title;
+    capabilityData[key].copy=values[`capability.${key}.copy`]||capabilityData[key].copy;
+    if(values[`capability.${key}.items`])capabilityData[key].rows=values[`capability.${key}.items`].split('\n').map(line=>line.split('|').map(value=>value.trim())).filter(row=>row[0]&&row[1]);
+  });
+  const active=q('[data-capability].active')?.dataset.capability||'build';
+  renderCapability(active);
+  if(roles?.length){
+    const list=q('#homeExperienceList');
+    list.innerHTML=roles.map((role,index)=>`<article class="exp-item${index===0?' open':''}"><button class="exp-trigger" type="button" aria-expanded="${index===0}" aria-controls="home-role-${escapeHtml(role.slug)}"><span class="exp-date">${escapeHtml(role.date_start)} — ${escapeHtml(role.date_end)}</span><span class="exp-title"><strong>${escapeHtml(role.title)}</strong><span>${escapeHtml(role.organization)}</span></span><span class="exp-icon" aria-hidden="true">+</span></button><div class="exp-body" id="home-role-${escapeHtml(role.slug)}"><div><ul>${(role.items||[]).map(item=>`<li>${escapeHtml(item)}</li>`).join('')}</ul></div></div></article>`).join('');
+    bindExperienceTriggers();
+  }
+}
+
+const startManagedHomepage=()=>loadManagedHomepage().catch(error=>console.warn('Managed homepage content unavailable; static content remains visible.',error));
+if(window.portfolioDb)startManagedHomepage();
+else document.addEventListener('portfolio:db-ready',startManagedHomepage,{once:true});

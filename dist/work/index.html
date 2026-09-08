@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="work.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Selected Shopify and E-commerce Work","description":"A curated selection from more than 1,300 Shopify stores completed and managed.","url":"https://raihan-commerce-portfolio.tonmoy-work-5077.chatgpt.site/work/","author":{"@type":"Person","name":"Md. Aminul Hoque Raihan"},"mainEntity":{"@type":"ItemList","numberOfItems":17,"itemListElement":[{"@type":"ListItem","position":1,"name":"August Sabbe"},{"@type":"ListItem","position":2,"name":"Jawliner"},{"@type":"ListItem","position":3,"name":"TSC Wardrobe"},{"@type":"ListItem","position":4,"name":"Mild Panic Publishing"},{"@type":"ListItem","position":5,"name":"Green Hands"},{"@type":"ListItem","position":6,"name":"Rina's Craft Creations"},{"@type":"ListItem","position":7,"name":"Shirtley Temple"},{"@type":"ListItem","position":8,"name":"Kingdom Wear"},{"@type":"ListItem","position":9,"name":"SACHIKA"},{"@type":"ListItem","position":10,"name":"Yesindeed"},{"@type":"ListItem","position":11,"name":"CAMOKAZI"},{"@type":"ListItem","position":12,"name":"Tulones"},{"@type":"ListItem","position":13,"name":"FNCTION CALM"},{"@type":"ListItem","position":14,"name":"NeuroMotion Support"},{"@type":"ListItem","position":15,"name":"Avoiding Anxiety Shop"},{"@type":"ListItem","position":16,"name":"KYKR Brands"},{"@type":"ListItem","position":17,"name":"Always On It"}]}}</script>
 </head>
-<body class="work-page">
+<body class="work-page" data-cms-page="work">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="scroll-progress" id="scrollProgress"></div>
   <header class="site-header">
@@ -95,7 +95,7 @@
             <div><span class="story-eyebrow label">Selected project</span><span class="story-sector" id="previewCategory">Fashion / DTC</span></div>
             <h3 id="previewTitle">August Sabbe</h3>
             <p id="previewSummary">A product-led apparel storefront structured around clear discovery, purchase confidence and everyday comfort.</p>
-            <dl class="project-scope"><div><dt>Ownership</dt><dd>End-to-end</dd></div><div><dt>Contribution</dt><dd>Strategy, UX, copy & build</dd></div></dl>
+            <dl class="project-scope"><div><dt>Ownership</dt><dd id="previewOwnership">End-to-end</dd></div><div><dt>Contribution</dt><dd id="previewContribution">Planning · Optimization · Design · Development · Copywriting</dd></div></dl>
             <div class="preview-actions"><button type="button" id="previousProject" aria-label="Previous project">← Previous</button><button type="button" id="togglePreview" aria-pressed="false">Pause scroll</button><button type="button" id="nextProject" aria-label="Next project">Next →</button></div>
           </div>
           <div class="preview-card">
@@ -126,7 +126,10 @@
     <section class="work-cta"><div class="container work-cta-grid"><div><span class="label">Available for the next challenge</span><h2>Bring the goal.<br>I’ll build the path.</h2></div><div><p>For a Shopify role, contract engagement or complete e-commerce build, send the opportunity or brief.</p><a class="btn btn-dark" href="mailto:mdaminulhoqueraihan@gmail.com">Start a conversation ↗</a></div></div></section>
   </main>
 
-  <footer class="footer"><div class="container"><span>© 2026 Md. Aminul Hoque Raihan</span><span>Shopify · Custom Websites · Digital Marketing · CRO</span><span>Dhaka, Bangladesh</span></div></footer>
+  <footer class="footer"><div class="container"><span>© 2026 Md. Aminul Hoque Raihan</span><span data-site-setting="profile.footer_services">Shopify · Custom Websites · Digital Marketing · CRO</span><span data-site-setting="profile.location">Dhaka, Bangladesh</span></div></footer>
   <script src="work.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4" crossorigin="anonymous" defer></script>
+  <script src="../supabase-config.js" defer></script>
+  <script src="../cms-runtime.js" defer></script>
 </body>
 </html>

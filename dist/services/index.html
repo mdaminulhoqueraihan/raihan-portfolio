@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="services.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Shopify, Custom Website and Digital Marketing Services","description":"Planning, UX design, Shopify and custom website development, conversion optimization, copywriting, digital marketing and ongoing commerce management.","provider":{"@type":"Person","name":"Md. Aminul Hoque Raihan","url":"https://raihan-commerce-portfolio.tonmoy-work-5077.chatgpt.site/"},"areaServed":"Worldwide","serviceType":["Shopify store development","Custom website design and development","User experience design","Conversion rate optimization","Conversion copywriting","Digital marketing","E-commerce management"]}</script>
 </head>
-<body class="services-page">
+<body class="services-page" data-cms-page="services">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="scroll-progress" id="scrollProgress"></div>
   <header class="site-header">
@@ -40,9 +40,9 @@
       <div class="services-grid-lines" aria-hidden="true"></div>
       <div class="container services-hero-grid">
         <div class="services-hero-copy">
-          <div class="hero-overline label">Digital capabilities · 2016—present</div>
-          <h1>From first plan to measurable growth, <span>I connect the complete experience.</span></h1>
-          <div class="services-intro"><p>One partner for Shopify stores, custom websites and digital marketing—from strategy and interface to development, campaigns and improvement.</p><div class="hero-actions"><a class="btn btn-primary" href="#service-scope">Explore the scope ↓</a><a class="btn btn-secondary" href="../work/">View selected work ↗</a></div></div>
+          <div class="hero-overline label" data-cms-key="hero.eyebrow">Digital capabilities · 2016—present</div>
+          <h1 data-cms-key="hero.title">From first plan to measurable growth, <span>I connect the complete experience.</span></h1>
+          <div class="services-intro"><p data-cms-key="hero.intro">One partner for Shopify stores, custom websites and digital marketing—from strategy and interface to development, campaigns and improvement.</p><div class="hero-actions"><a class="btn btn-primary" href="#service-scope">Explore the scope ↓</a><a class="btn btn-secondary" href="../work/">View selected work ↗</a></div></div>
         </div>
         <aside class="scope-docket" aria-label="Service scope summary">
           <div class="docket-head"><span>Ownership map</span><b>01—08</b></div>
@@ -55,8 +55,8 @@
 
     <section class="service-scope" id="service-scope">
       <div class="container">
-        <div class="scope-heading reveal"><div><div class="section-kicker label">Service scope</div><h2>Eight responsibilities.<br><span>One accountable workflow.</span></h2></div><p>I can take ownership of the complete digital experience or join at the stage where the business needs focused execution.</p></div>
-        <div class="service-ledger">
+        <div class="scope-heading reveal"><div><div class="section-kicker label">Service scope</div><h2 data-cms-key="scope.title">Eight responsibilities.<br><span>One accountable workflow.</span></h2></div><p data-cms-key="scope.intro">I can take ownership of the complete digital experience or join at the stage where the business needs focused execution.</p></div>
+        <div class="service-ledger" id="serviceLedger">
           <article class="service-row reveal"><div class="service-number">01</div><div class="service-title"><span>Direction</span><h3>Business & commerce planning</h3><p>Define what the website needs to say, show and enable before design or development begins.</p></div><ul><li>Audience, offer and competitor review</li><li>Website and page architecture</li><li>Content, navigation and functionality planning</li><li>Customer journey and conversion priorities</li></ul><a href="../contact/" aria-label="Discuss business and commerce planning">Discuss this scope ↗</a></article>
           <article class="service-row reveal"><div class="service-number">02</div><div class="service-title"><span>Experience</span><h3>UX & interface design</h3><p>Turn the business plan into a clear, responsive interface built around real user behaviour.</p></div><ul><li>Wireframes and page structure</li><li>Brand-led visual direction</li><li>Desktop and mobile experience</li><li>Discovery, trust and action flow</li></ul><a href="../contact/" aria-label="Discuss UX and interface design">Discuss this scope ↗</a></article>
           <article class="service-row reveal"><div class="service-number">03</div><div class="service-title"><span>Commerce build</span><h3>Shopify development</h3><p>Implement the experience as a maintainable storefront that works across devices and business operations.</p></div><ul><li>Theme setup and customization</li><li>Custom sections and templates</li><li>Products, variants, bundles and apps</li><li>Responsive QA and speed-focused build</li></ul><a href="../contact/" aria-label="Discuss Shopify development">Discuss this scope ↗</a></article>
@@ -72,7 +72,7 @@
     <section class="managed-layer">
       <div class="container managed-grid reveal">
         <div class="managed-marker"><span>Important distinction</span><strong>MANAGED<br>WITHIN<br>THE WORK</strong></div>
-        <div class="managed-copy"><div class="section-kicker label">SEO & analytics</div><h2>Managed as part of the commerce system—not sold as a standalone service.</h2><p>When an engagement needs search or measurement oversight, I manage the work in context: connecting the store, team, data and commercial priorities rather than offering a separate SEO or analytics package.</p></div>
+        <div class="managed-copy"><div class="section-kicker label">SEO & analytics</div><h2 data-cms-key="managed.title">Managed as part of the commerce system—not sold as a standalone service.</h2><p data-cms-key="managed.intro">When an engagement needs search or measurement oversight, I manage the work in context: connecting the store, team, data and commercial priorities rather than offering a separate SEO or analytics package.</p></div>
         <div class="managed-list"><article><span>01</span><div><strong>SEO management</strong><p>Priorities, delivery coordination, technical and on-page oversight, and search-performance review.</p></div></article><article><span>02</span><div><strong>Analytics management</strong><p>GA4, Search Console and Shopify reporting used to monitor the journey and guide decisions.</p></div></article><article><span>03</span><div><strong>Cross-team coordination</strong><p>Connect developers, content, advertising and storefront changes around one commercial goal.</p></div></article></div>
       </div>
     </section>
@@ -98,10 +98,13 @@
       </div>
     </section>
 
-    <section class="service-cta" id="contact"><div class="container service-cta-grid"><div><span class="label">Have a website, campaign or role in mind?</span><h2>Bring the brief.<br>I’ll map the work.</h2></div><div><p>Share the current situation, business goal, priority and timeline. I’ll identify the right engagement scope.</p><a class="btn btn-dark" href="../contact/">Start a conversation ↗</a><a class="text-link" href="../aminul-hoque-raihan-cv.pdf" download>Download CV ↓</a></div></div></section>
+    <section class="service-cta" id="contact"><div class="container service-cta-grid"><div><span class="label">Have a website, campaign or role in mind?</span><h2 data-cms-key="cta.title">Bring the brief.<br>I’ll map the work.</h2></div><div><p data-cms-key="cta.intro">Share the current situation, business goal, priority and timeline. I’ll identify the right engagement scope.</p><a class="btn btn-dark" href="../contact/">Start a conversation ↗</a><a class="text-link" href="../aminul-hoque-raihan-cv.pdf" download>Download CV ↓</a></div></div></section>
   </main>
 
-  <footer class="footer"><div class="container"><span>© 2026 Md. Aminul Hoque Raihan</span><span>Shopify · Custom Websites · Digital Marketing · CRO</span><span>Dhaka, Bangladesh</span></div></footer>
+  <footer class="footer"><div class="container"><span>© 2026 Md. Aminul Hoque Raihan</span><span data-site-setting="profile.footer_services">Shopify · Custom Websites · Digital Marketing · CRO</span><span data-site-setting="profile.location">Dhaka, Bangladesh</span></div></footer>
   <script src="services.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4" crossorigin="anonymous" defer></script>
+  <script src="../supabase-config.js" defer></script>
+  <script src="../cms-runtime.js" defer></script>
 </body>
 </html>

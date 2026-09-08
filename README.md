@@ -9,12 +9,13 @@ Production-focused personal portfolio for Shopify and custom website design and 
 - Interactive `/results/` evidence archive with 14 supplied Shopify and Meta dashboard captures
 - Dedicated `/services/` page for Shopify, custom websites, digital marketing and connected commerce engagements
 - Recruiter-focused `/experience/` page with the verified career record and education
-- Dedicated `/contact/` page with direct contact details and a frontend-ready project brief workflow
+- Dedicated `/contact/` page with secure Supabase-backed inquiry submission
+- Authenticated `/admin/` content workspace with inquiry inbox and media uploads
 - Mobile announcement slider with manual controls and autoplay
 - Accessible interactive capabilities and experience sections
 - Downloadable CV and direct contact links
 - Search metadata, Person structured data, robots.txt and sitemap.xml
-- Lightweight static delivery with no framework or third-party runtime dependency
+- Lightweight static delivery with Supabase Auth, Postgres, Storage and row-level security
 
 ## Frontend routes
 
@@ -23,11 +24,14 @@ Production-focused personal portfolio for Shopify and custom website design and 
 - `/results/` — verified advertising, store performance and organic search-attribution evidence
 - `/services/` — Shopify, custom website development, digital marketing, UX, CRO, copywriting and ongoing management
 - `/experience/` — career chronology, role responsibilities, technical background and recruiter summary
-- `/contact/` — hiring and project inquiry page with validated email-draft handoff
+- `/contact/` — hiring and project inquiry page with validated database submission
+- `/admin/` — owner-only content, portfolio, results, media and inquiry management
 
-## Admin-ready direction
+## Content management
 
-The later admin panel will manage project records, screenshots, case-study content, evidence metrics and site settings. Public content should remain server-rendered or statically generated so search engines receive complete HTML. Authentication, uploads and database integration will be added only when the frontend content model is approved.
+The public pages keep complete static fallback content for resilience and search visibility, then hydrate published records from Supabase. The admin manages global settings, page copy, services, experience, projects, evidence, uploaded media and contact submissions. Authentication and database authorization are enforced by Supabase Auth and row-level security; the service-role key is never shipped to the browser.
+
+The authorized owner email is `mdaminulhoqueraihan@gmail.com`. On the first visit to `/admin/`, use “First-time account setup,” confirm the Supabase email if requested, then sign in.
 
 ## Deployment notes
 

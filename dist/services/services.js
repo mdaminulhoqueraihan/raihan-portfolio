@@ -43,3 +43,17 @@ function updateScrollProgress(){
 }
 addEventListener('scroll',updateScrollProgress,{passive:true});
 updateScrollProgress();
+
+const escapeHtml=value=>String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+
+async function loadManagedServices(){
+  if(!window.portfolioDb)return;
+  const {data,error}=await window.portfolioDb.from('services').select('*').eq('published',true).order('sort_order');
+  if(error||!data?.length)return;
+  const ledger=q('#serviceLedger');
+  ledger.innerHTML=data.map((service,index)=>`<article class="service-row reveal visible"><div class="service-number">${String(index+1).padStart(2,'0')}</div><div class="service-title"><span>${escapeHtml(service.eyebrow)}</span><h3>${escapeHtml(service.title)}</h3><p>${escapeHtml(service.description)}</p></div><ul>${(service.items||[]).map(item=>`<li>${escapeHtml(item)}</li>`).join('')}</ul><a href="../contact/" aria-label="Discuss ${escapeHtml(service.title)}">Discuss this scope ↗</a></article>`).join('');
+}
+
+const startManagedServices=()=>loadManagedServices().catch(error=>console.warn('Managed services unavailable; static services remain visible.',error));
+if(window.portfolioDb)startManagedServices();
+else document.addEventListener('portfolio:db-ready',startManagedServices,{once:true});

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://raihan-commerce-portfolio.tonmoy-work-5077.chatgpt.site/sitemap.xml
