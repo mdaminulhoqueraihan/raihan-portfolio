@@ -77,6 +77,30 @@ qa('#navLinks a').forEach(link=>link.addEventListener('click',()=>{
   menuButton.setAttribute('aria-expanded','false');
 }));
 
+const announcementSlider=q('[data-announcement-slider]');
+if(announcementSlider){
+  const announcementTrack=q('[data-announcement-track]',announcementSlider);
+  const announcementSlides=qa('span',announcementTrack);
+  let announcementIndex=0;
+  let announcementTimer;
+  const showAnnouncement=index=>{
+    announcementIndex=(index+announcementSlides.length)%announcementSlides.length;
+    announcementTrack.style.transform=`translateX(-${announcementIndex*100}%)`;
+  };
+  const stopAnnouncements=()=>clearInterval(announcementTimer);
+  const startAnnouncements=()=>{
+    stopAnnouncements();
+    if(matchMedia('(max-width: 760px)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      announcementTimer=setInterval(()=>showAnnouncement(announcementIndex+1),4500);
+    }
+  };
+  q('[data-announcement-prev]',announcementSlider).addEventListener('click',()=>{showAnnouncement(announcementIndex-1);startAnnouncements()});
+  q('[data-announcement-next]',announcementSlider).addEventListener('click',()=>{showAnnouncement(announcementIndex+1);startAnnouncements()});
+  addEventListener('resize',startAnnouncements,{passive:true});
+  document.addEventListener('visibilitychange',()=>document.hidden?stopAnnouncements():startAnnouncements());
+  startAnnouncements();
+}
+
 if('IntersectionObserver' in window){
   const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(entry.isIntersecting){

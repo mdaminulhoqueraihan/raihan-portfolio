@@ -5,14 +5,16 @@ Production-focused personal portfolio for Shopify, e-commerce, CRO, SEO and digi
 ## Current scope
 
 - Responsive homepage
+- Interactive `/work/` archive with 17 supplied storefront captures
+- Mobile announcement slider with manual controls and autoplay
 - Accessible interactive capabilities and experience sections
 - Downloadable CV and direct contact links
 - Search metadata, Person structured data, robots.txt and sitemap.xml
 - Lightweight static delivery with no framework or third-party runtime dependency
 
-## Planned frontend routes
+## Frontend routes
 
-- `/work/` — filterable project index
+- `/work/` — interactive project index with one active auto-scrolling preview
 - `/work/[slug]/` — case studies with auto-scrolling website screenshots
 - `/results/` — verified advertising, CRO, SEO and analytics evidence
 
