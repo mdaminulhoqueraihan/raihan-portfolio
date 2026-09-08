@@ -23,13 +23,13 @@ const capabilityData={
     ]
   },
   grow:{
-    index:'03 / GROW',
-    title:'Acquisition connected to the experience after the click.',
-    copy:'SEO, paid campaigns and analytics are most useful when they work with the storefront rather than around it.',
+    index:'03 / MANAGE',
+    title:'The store keeps improving after the initial launch.',
+    copy:'I coordinate storefront updates, campaigns, reporting and growth priorities as one ongoing commerce operation.',
     rows:[
-      ['SEO delivery','Keyword research, on-page SEO, technical SEO and cross-team coordination.'],
-      ['Paid & organic strategy','Meta Ads, Google Ads, social media and creative optimization.'],
-      ['Analytics & iteration','Google Analytics, Search Console and performance-led decisions.']
+      ['Ongoing store management','Maintenance, merchandising, campaign pages and operational improvements.'],
+      ['Campaign coordination','Paid acquisition, creative and landing experience kept aligned.'],
+      ['SEO & analytics oversight','Managed within active commerce engagements to guide priorities and teams.']
     ]
   }
 };
