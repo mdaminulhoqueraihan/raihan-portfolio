@@ -63,6 +63,8 @@
     }
     session=nextSession;
     $('#ownerEmail').textContent=data.email;
+    $('#authPassword').value='';
+    setAuthStatus('');
     $('#authShell').hidden=true;
     $('#adminApp').hidden=false;
     await selectSection(activeSection);
