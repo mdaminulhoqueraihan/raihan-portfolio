@@ -1,0 +1,19 @@
+.auth-shell {
+  grid-template-columns: minmax(0, 720px);
+  place-content: center;
+  padding: clamp(24px, 5vw, 72px);
+}
+
+.auth-card {
+  width: 100%;
+}
+
+.auth-kicker {
+  margin-top: 56px;
+}
+
+@media (max-width: 520px) {
+  .auth-kicker {
+    margin-top: 40px;
+  }
+}
