@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="theme-color" content="#080a0f">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <base href="/admin/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Portfolio Admin | Aminul Raihan</title>
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body>
   <main class="auth-shell" id="authShell">
     <section class="auth-card" aria-labelledby="authTitle">
-      <a class="admin-brand" href="../"><span>AR</span><strong>Aminul Raihan</strong></a>
+      <a class="admin-brand" href="/"><span>AR</span><strong>Aminul Raihan</strong></a>
       <div class="auth-kicker">Private content workspace</div>
       <h1 id="authTitle">Portfolio<br>control room.</h1>
       <p>Sign in with the authorized owner account to manage website content, portfolio media, performance evidence and inquiries.</p>
@@ -30,7 +31,7 @@
 
   <div class="admin-app" id="adminApp" hidden>
     <aside class="sidebar">
-      <a class="admin-brand" href="../"><span>AR</span><strong>Aminul Raihan</strong></a>
+      <a class="admin-brand" href="/"><span>AR</span><strong>Aminul Raihan</strong></a>
       <div class="sidebar-label">Workspace</div>
       <nav id="adminNav" aria-label="Admin sections">
         <button class="active" type="button" data-section="overview"><span>Overview</span><b>01</b></button>
@@ -43,7 +44,7 @@
         <button type="button" data-section="media"><span>Media library</span><b>08</b></button>
         <button type="button" data-section="settings"><span>Site settings</span><b>09</b></button>
       </nav>
-      <div class="sidebar-foot"><a href="../" target="_blank">Open website ↗</a><button type="button" id="signOutButton">Sign out</button></div>
+      <div class="sidebar-foot"><a href="/" target="_blank">Open website ↗</a><button type="button" id="signOutButton">Sign out</button></div>
     </aside>
 
     <main class="workspace">
@@ -62,8 +63,8 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4" crossorigin="anonymous"></script>
-  <script src="../supabase-config.js"></script>
-  <script src="admin.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4" crossorigin="anonymous"></script>
+  <script defer src="/supabase-config.js"></script>
+  <script defer src="/admin/admin.js"></script>
 </body>
 </html>
