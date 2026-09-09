@@ -11,6 +11,8 @@
   let currentRecord=null;
   let toastTimer;
 
+  window.PORTFOLIO_ADMIN_READY=true;
+
   const sectionInfo={
     overview:['Portfolio CMS','Overview'],content:['Website copy','Page content'],services:['Capabilities','Services'],experience:['Career record','Experience'],projects:['Selected work','Portfolio work'],results:['Performance archive','Results'],inquiries:['Contact pipeline','Inquiries'],media:['Asset management','Media library'],settings:['Global content','Site settings']
   };
@@ -64,6 +66,13 @@
     $('#authShell').hidden=true;
     $('#adminApp').hidden=false;
     await selectSection(activeSection);
+  }
+
+  if(!db){
+    setAuthStatus('The admin application could not connect. Refresh the page; if the problem continues, check that scripts are allowed in this browser.',true);
+    $('#signInButton').disabled=true;
+    $('#setupButton').disabled=true;
+    return;
   }
 
   $('#authForm').addEventListener('submit',async event=>{
@@ -324,7 +333,6 @@
     $('#workspaceBody').innerHTML=`<div class="loading">Unable to load this section: ${escapeHtml(error.message||'Unknown error')}</div>`;
   }
 
-  if(!db){setAuthStatus('Supabase configuration is unavailable.',true);return}
   db.auth.getSession().then(({data})=>data.session&&verifyAndEnter(data.session));
   db.auth.onAuthStateChange((event,nextSession)=>{
     if(event==='SIGNED_OUT')session=null;
