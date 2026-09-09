@@ -1,3 +1,7 @@
+[hidden] {
+  display: none !important;
+}
+
 .auth-shell {
   grid-template-columns: minmax(0, 720px);
   place-content: center;
